@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/main.css">
+    <title>Proxplat</title>
+</head>
+<body>
+    <div id="head" class="header">
+            <p class="title">Proxplat<img width="100" height="auto" style="margin-left: 50px;" src="https://renewedvision.com/wp-content/uploads/2019/11/ProPresenter-Logo-WhiteSpace.svg"></p>
+            
+            <p1 class="text">
+                Die Plattform für ProPresenter im Browser
+            </p1>
+
+            <div class="topnav">
+                <a href="/home">Home</a>
+                <a href="/stage">StageDisplay</a>
+                <a href="/live">Live</a>
+                <a class="active" href="/changeapi">change API</a>
+                
+            </div>
+        
+        
+
+    </div>
+    <br><br>
+    <div class="top">
+        
+            <label class="text" for="ip">IP:</label>
+            <input class="input" type="text" placeholder=<%= ip %> id="ip" name="ip">
+            <br>
+            <label class="text" for="port">Port:</label>
+            <input class="input" type="text" placeholder=<%= port %> id="port" name="port">
+            <br>
+            <button class="formbutton" type="submit" onclick="changeapi();" id="changeip">Ändern</button>
+    </div>
+    
+</body>
+
+<script>
+
+function changeapi() {
+    var ip = document.getElementById('ip').value;
+    var port = document.getElementById('port').value;
+    var link = "/changeapi/" + ip + "/" + port;
+
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", link, true);
+    xhr.send(200);
+
+}
+    
+</script>
+
+
+</html>

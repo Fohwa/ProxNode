@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/main.css">
+    <title>Proxplat</title>
+</head>
+<body>
+    <div id="head" class="header">
+            <p class="title">Proxplat<img width="100" height="auto" style="margin-left: 50px;" src="https://renewedvision.com/wp-content/uploads/2019/11/ProPresenter-Logo-WhiteSpace.svg"></p>
+            
+            <p1 class="text">
+                Die Plattform für ProPresenter im Browser
+            </p1>
+
+            <div class="topnav">
+                <a href="/home">Home</a>
+                <a href="/stage">StageDisplay</a>
+                <a class="active" href="/live">Live</a>
+                <a href="/changeapi">change API</a>
+                
+            </div>
+        
+
+    </div>
+    <br><br>
+    <div class="top">
+        <label class="text" for="ip">IP:</label>
+        <input class="input" type="text" disabled value=<%= ip %> placeholder="192.168.0.123" id="ip">
+        <label class="text" for="port">Port:</label>
+        <input class="input" type="text" disabled value=<%= port %> placeholder="5000" id="port">
+    </div>
+    <br>
+
+
+    <img id="live_slide" width="100%" height="auto" src="https://a.fsdn.com/con/app/proj/testimages/screenshots/img_640x360_3x8bit_RGB_color_SMPTE_RP_219_2002.png/max/max/1">
+    <br>
+
+    <button class="button" style="background-color: #4caf57;" id="previous" onclick="apicall('/v1/trigger/previous');">zurück</button>
+    <br>
+    <button class="button" id="next" onclick="apicall('/v1/trigger/next');">weiter</button>
+
+    <br>
+    <a href="/">back</a>
+
+</body>
+
+<script>
+
+function apicall(call) {
+        const IP = document.getElementById("ip").value;
+        const PORT = document.getElementById("port").value;
+        var api = "http://" + IP + ":" + PORT;
+
+        var request = new XMLHttpRequest();
+        request.open('GET', api + call);
+        request.send();
+        request.onload = ()=>{
+            try {
+                console.log(JSON.parse(request.response));
+            }
+            catch {
+
+            }
+        
+        }   
+    }
+
+imgSrc = "test";
+    function getimgSrc() {
+        const IP = document.getElementById("ip").value;
+        const PORT = document.getElementById("port").value;
+        var api = "http://" + IP + ":" + PORT;
+        var request = new XMLHttpRequest();
+        request.open('GET', api + '/v1/presentation/slide_index');
+        request.send();
+        request.onload = ()=>{
+            try {
+                data = JSON.parse(request.response);
+                presentationUuid = data['presentation']['presentation_id']['uuid']
+                slide_index = data['presentation']['index']
+
+                var imgSrc = api + "/v1/presentation/" + presentationUuid + "/thumbnail/" + slide_index + '?quality=1920';
+                console.log(imgSrc)
+                document.getElementById("live_slide").src = imgSrc
+            }
+            catch {}
+        }
+    }
+    setInterval(getimgSrc,500);
+
+    //document.getElementById("myImg").src = getimgSrc();
+        
+
+        
+        
+
+</script>
+
+
+</html>

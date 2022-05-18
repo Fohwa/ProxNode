@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/main.css">
+    <title>Proxplat</title>
+</head>
+<body>
+    <div id="head" class="header">
+            <p class="title">Proxplat<img width="100" height="auto" style="margin-left: 50px;" src="https://renewedvision.com/wp-content/uploads/2019/11/ProPresenter-Logo-WhiteSpace.svg"></p>
+            
+            <p1 class="text">
+                Die Plattform für ProPresenter im Browser
+            </p1>
+
+            <div class="topnav">
+                <a href="/home">Home</a>
+                <a class="active" href="/stage">StageDisplay</a>
+                <a href="/live">Live</a>
+                <a href="/changeapi">change API</a>
+                
+            </div>
+        
+        
+
+    </div>
+    <br><br>
+    <div class="top">
+        <label class="text" for="ip">IP:</label>
+        <input class="input" type="text" disabled value=<%= ip %> placeholder="192.168.0.123" id="ip">
+        <label class="text" for="port">Port:</label>
+        <input class="input" type="text" disabled value=<%= port %> placeholder="5000" id="port">
+    </div>
+    <h1 class="text">
+        Stage Display
+    </h1>
+
+    <div class="center">
+        <button class="button center" style="background-color: #4caf57;" id="vollesbild" onclick="gitSaveApicall('/v1/stage/screen/0/layout/10');">Volles Bild</button>
+        <br>
+        <button class="button center" id="lobpreis" onclick="gitSaveApicall('/v1/stage/screen/0/layout/8');">Lobpreis</button>
+        <br><br>
+        <label class="text" for="index">Custom:</label>
+        <input class="input" type="text" placeholder="0" id="index">
+        <br>
+        <button id="check" onclick="gitSaveApicall('/v1/stage/layouts')" class="button" style="width: auto; background-color: pink">get list</button>
+        <button class="button center" style="width: auto; background-color: blueviolet;" id="custom" onclick="customStageDisplay();">Custom</button>
+    </div>
+    
+</body>
+
+<script>
+
+function apicall(call) {
+        const IP = document.getElementById("ip").value;
+        const PORT = document.getElementById("port").value;
+        var api = "http://" + IP + ":" + PORT;
+
+        var request = new XMLHttpRequest();
+        request.open('GET', api + call);
+        request.send();
+        request.onload = ()=>{
+            try {
+                console.log(JSON.parse(request.response));
+            }
+            catch {
+
+            }
+        
+        }   
+    }
+
+    function customStageDisplay() {
+        const index = document.getElementById('index').value;
+        var call = '/v1/stage/screen/0/layout/' + index
+        gitSaveApicall(call)
+    }
+
+    function gitSaveApicall(call) {
+        const IP = document.getElementById("ip").value;
+        const PORT = document.getElementById("port").value;
+        var api = "http://" + IP + ":" + PORT + call;
+        window.location = api;
+    }
+
+    
+</script>
+
+
+</html>
+© 2022 GitHub, Inc.
+Terms
+Privacy
+Security
+Status
+Docs
+Contact GitHub
+Pricing
+API
+Training
+Blog
+About
+Loading complete

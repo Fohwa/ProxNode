@@ -1,7 +1,6 @@
 const express = require('express');
 const app = require('express')();
 const fs = require('fs');
-var obj;
 const path = require('path');
 const port = 3000;
 
@@ -23,6 +22,14 @@ app.get('/home', (req, res) => {
     if (err) throw err;
     api = JSON.parse(data);
     res.render('index.ejs', { ip: api.ip, port: api.port })
+  });
+});
+
+app.get('/presentation', (req, res) => {
+  fs.readFile('./database/network.json', 'utf8', function (err, data) {
+    if (err) throw err;
+    api = JSON.parse(data);
+    res.render('presentation.ejs', { ip: api.ip, port: api.port })
   });
 });
 

@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/main.css">
+    <link rel="icon" href="https://renewedvision.com/wp-content/uploads/2019/11/ProPresenter-Logo-WhiteSpace.svg">
     <title>Proxplat</title>
 </head>
 <body>
@@ -20,6 +21,7 @@
                 <a href="/stage">StageDisplay</a>
                 <a href="/live">Live</a>
                 <a class="active" href="/changeapi">change API</a>
+                <a href="/presentation">Presentation</a>
                 
             </div>
         
@@ -40,20 +42,7 @@
     
 </body>
 
-<script>
-
-function changeapi() {
-    var ip = document.getElementById('ip').value;
-    var port = document.getElementById('port').value;
-    var link = "/changeapi/" + ip + "/" + port;
-
-    var xhr = new XMLHttpRequest();
-    xhr.open("POST", link, true);
-    xhr.send(200);
-
-}
-    
-</script>
+<script src="script/main.js"></script>
 
 
 </html>

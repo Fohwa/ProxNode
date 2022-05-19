@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/main.css">
+    <link rel="icon" href="https://renewedvision.com/wp-content/uploads/2019/11/ProPresenter-Logo-WhiteSpace.svg">
     <title>Proxplat</title>
 </head>
 <body>
@@ -20,6 +21,7 @@
                 <a href="/stage">StageDisplay</a>
                 <a class="active" href="/live">Live</a>
                 <a href="/changeapi">change API</a>
+                <a href="/presentation">Presentation</a>
                 
             </div>
         
@@ -37,6 +39,7 @@
 
     <img id="live_slide" width="100%" height="auto" src="https://a.fsdn.com/con/app/proj/testimages/screenshots/img_640x360_3x8bit_RGB_color_SMPTE_RP_219_2002.png/max/max/1">
     <br>
+    
 
     <button class="button" style="background-color: #4caf57;" id="previous" onclick="apicall('/v1/trigger/previous');">zurück</button>
     <br>
@@ -47,56 +50,31 @@
 
 </body>
 
-<script>
 
-function apicall(call) {
-        const IP = document.getElementById("ip").value;
-        const PORT = document.getElementById("port").value;
-        var api = "http://" + IP + ":" + PORT;
+<script src="script/main.js">
 
-        var request = new XMLHttpRequest();
-        request.open('GET', api + call);
-        request.send();
-        request.onload = ()=>{
-            try {
-                console.log(JSON.parse(request.response));
-            }
-            catch {
 
-            }
-        
-        }   
-    }
+function getimgSrc() {
+    const IP = document.getElementById("ip").value;
+    const PORT = document.getElementById("port").value;
+    var api = "http://" + IP + ":" + PORT;
+    var request = new XMLHttpRequest();
+    request.open('GET', api + '/v1/presentation/slide_index');
+    request.send();
+    request.onload = ()=>{
+        try {
+            data = JSON.parse(request.response);
+            presentationUuid = data['presentation_index']['presentation_id']['uuid']
+            slide_index = data['presentation_index']['index']
 
-imgSrc = "test";
-    function getimgSrc() {
-        const IP = document.getElementById("ip").value;
-        const PORT = document.getElementById("port").value;
-        var api = "http://" + IP + ":" + PORT;
-        var request = new XMLHttpRequest();
-        request.open('GET', api + '/v1/presentation/slide_index');
-        request.send();
-        request.onload = ()=>{
-            try {
-                data = JSON.parse(request.response);
-                presentationUuid = data['presentation']['presentation_id']['uuid']
-                slide_index = data['presentation']['index']
-
-                var imgSrc = api + "/v1/presentation/" + presentationUuid + "/thumbnail/" + slide_index + '?quality=1920';
-                console.log(imgSrc)
-                document.getElementById("live_slide").src = imgSrc
-            }
-            catch {}
+            var imgSrc = api + "/v1/presentation/" + presentationUuid + "/thumbnail/" + slide_index + '?quality=1920';
+            console.log(imgSrc)
+            document.getElementById("live_slide").src = imgSrc
         }
+        catch {}
     }
-    setInterval(getimgSrc,500);
-
-    //document.getElementById("myImg").src = getimgSrc();
-        
-
-        
-        
-
+}
+setInterval(getimgSrc,500);
 </script>
 
 

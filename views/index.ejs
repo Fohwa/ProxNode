@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/main.css">
+    <link rel="icon" href="https://renewedvision.com/wp-content/uploads/2019/11/ProPresenter-Logo-WhiteSpace.svg">
     <title>Proxplat</title>
 </head>
 <body>
@@ -20,6 +21,7 @@
                 <a href="/stage">StageDisplay</a>
                 <a href="/live">Live</a>
                 <a href="/changeapi">change API</a>
+                <a href="/presentation">Presentation</a>
                 
             </div>
         
@@ -42,36 +44,7 @@
     
 </body>
 
-<script>
-
-function apicall(call) {
-        const IP = document.getElementById("ip").value;
-        const PORT = document.getElementById("port").value;
-        var api = "http://" + IP + ":" + PORT;
-
-        var request = new XMLHttpRequest();
-        request.open('GET', api + call);
-        request.send();
-        request.onload = ()=>{
-            try {
-                console.log(JSON.parse(request.response));
-            }
-            catch {
-
-            }
-        
-        }   
-    }
-
-    function gitSaveApicall(call) {
-        const IP = document.getElementById("ip").value;
-        const PORT = document.getElementById("port").value;
-        var api = "http://" + IP + ":" + PORT + call;
-        window.location = api;
-    }
-
-    
-</script>
+<script src="./script/main.js"></script>
 
 
 </html>

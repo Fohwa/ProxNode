@@ -49,19 +49,19 @@ app.get('/live', (req, res) => {
   });
 });
 
-app.get('/stage', (req, res) => {
+app.get('/control', (req, res) => {
   fs.readFile('./database/network.json', 'utf8', function (err, data) {
     if (err) throw err;
     api = JSON.parse(data);
-    res.render('stagedisplay.ejs', { ip: api.ip, port: api.port })
+    res.render('control.ejs', { ip: api.ip, port: api.port })
   });
 });
 
-app.get('/changeapi', (req, res) => {
+app.get('/settings', (req, res) => {
   fs.readFile('./database/network.json', 'utf8', function (err, data) {
     if (err) throw err;
     api = JSON.parse(data);
-    res.render('changeApi.ejs', { ip: api.ip, port: api.port })
+    res.render('settings.ejs', { ip: api.ip, port: api.port })
   });
 });
 

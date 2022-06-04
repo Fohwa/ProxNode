@@ -212,6 +212,13 @@ background-size: 100%;
 background-image: linear-gradient(to right, rgba(0,0,255,0.5), rgb(26, 61, 75));
 }
 
+.infobox {
+  border: 2px solid grey;
+  border-radius: 5px;
+  padding: 5px;
+  align-items: left;
+}
+
 .content {
 margin-top: 5%;
 margin-left: auto;

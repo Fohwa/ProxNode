@@ -20,6 +20,11 @@ see all slides from current presentation, jump slides
 ### Home
 Display general information and status of ProPresenter
 - if not connected link to settings
+    - name
+    - platform
+    - os version
+    - host description
+    - api version
 
 ### Presentation
 copy show mode

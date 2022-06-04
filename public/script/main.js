@@ -63,3 +63,18 @@ function getimgSrc() {
         catch {}
     }
 }
+
+function returnApiResponse(url, callback) {
+    var request = new XMLHttpRequest();
+    request.open('GET', url);
+    request.send();
+    request.onload = ()=>{
+        try {
+            callback(request.response);
+        }
+        catch {
+            console.log("failed to get JSON");
+            callback("");
+        }
+    }
+}

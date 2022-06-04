@@ -37,12 +37,45 @@
         <input class="input" type="text" disabled value=<%= port %> placeholder="5000" id="port">
     </div>
     
+    <div id="info" class="text">
+
+        
+
+    </div>
 
     
     
 </body>
 
-<script src="./script/main.js"></script>
+<script src="./script/main.js">
+    
+    
+</script>
+<script>
+    var api = "http://192.168.178.47:5000"
+    var apicall = "/version"
+    var url = api + apicall;
+
+    function test(text) {
+        data = JSON.parse(text);
+
+        for (var key in data) {
+            if (data.hasOwnProperty(key)) {
+                var element = ""
+                document.getElementById('info').innerHTML += '<div class="infobox"><p id="'+key+'"><label for="'+key+'">'+key+'</label>: '+data[key]+'</p></div><br>';
+
+            }
+        }
+
+        
+        
+    }
+
+    returnApiResponse(url, test);
+    
+    
+    
+</script>
 
 
 </html>

@@ -25,6 +25,14 @@ app.get('/home', (req, res) => {
   });
 });
 
+app.get('/clicker', (req, res) => {
+  fs.readFile('./database/network.json', 'utf8', function (err, data) {
+    if (err) throw err;
+    api = JSON.parse(data);
+    res.render('clicker.ejs', { ip: api.ip, port: api.port })
+  });
+});
+
 app.get('/presentation', (req, res) => {
   fs.readFile('./database/network.json', 'utf8', function (err, data) {
     if (err) throw err;

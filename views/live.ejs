@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/dropdown.css">
     <link rel="icon" href="https://renewedvision.com/wp-content/uploads/2019/11/ProPresenter-Logo-WhiteSpace.svg">
     <title>Proxplat</title>
 </head>
@@ -37,8 +38,17 @@
     </div>
     <br>
 
+    <label for="time">Delay:</label>
 
-    <img id="live_slide" width="100%" height="auto" src="https://a.fsdn.com/con/app/proj/testimages/screenshots/img_640x360_3x8bit_RGB_color_SMPTE_RP_219_2002.png/max/max/1">
+        <select name="time" id="time">
+            <option value="500">500</option>
+            <option value="100">100</option>
+            <option value="50">50</option>
+            <option value="10">10</option>
+        </select>
+        (Wähle aus wie schnell sich das Bild updaten soll in Millisekunden)
+
+    <img id="live_slide" width="100%" onclick="fullscreen();" height="auto" src="https://a.fsdn.com/con/app/proj/testimages/screenshots/img_640x360_3x8bit_RGB_color_SMPTE_RP_219_2002.png/max/max/1">
     <br>
     
 
@@ -53,7 +63,9 @@
 
 
 <script src="script/main.js">
-
+    
+</script>
+<script>
 
 function getimgSrc() {
     const IP = document.getElementById("ip").value;
@@ -74,8 +86,15 @@ function getimgSrc() {
         }
         catch {}
     }
+    delay = document.getElementById('time').value;
+    setTimeout(getimgSrc, delay)
 }
-setInterval(getimgSrc,500);
+
+getimgSrc();
+
+function fullscreen() {
+    document.location.href="/fullscreen";
+}
 </script>
 
 

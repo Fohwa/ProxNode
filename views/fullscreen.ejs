@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/dropdown.css">
+    <link rel="icon" href="https://renewedvision.com/wp-content/uploads/2019/11/ProPresenter-Logo-WhiteSpace.svg">
+    <title>Proxplat</title>
+</head>
+<body>
+    <div class="top">
+        <label class="text" for="ip">IP:</label>
+        <input class="input" type="text" disabled value=<%= ip %> placeholder="192.168.0.123" id="ip">
+        <label class="text" for="port">Port:</label>
+        <input class="input" type="text" disabled value=<%= port %> placeholder="5000" id="port">
+    </div>
+    <img id="live_slide" class="fullscreen" src="https://a.fsdn.com/con/app/proj/testimages/screenshots/img_640x360_3x8bit_RGB_color_SMPTE_RP_219_2002.png/max/max/1">
+
+</body>
+
+
+<script src="script/main.js">
+    
+</script>
+<script>
+
+function getimgSrc() {
+    const IP = document.getElementById("ip").value;
+    const PORT = document.getElementById("port").value;
+    var api = "http://" + IP + ":" + PORT;
+    var request = new XMLHttpRequest();
+    request.open('GET', api + '/v1/presentation/slide_index');
+    request.send();
+    request.onload = ()=>{
+        try {
+            data = JSON.parse(request.response);
+            presentationUuid = data['presentation_index']['presentation_id']['uuid']
+            slide_index = data['presentation_index']['index']
+
+            var imgSrc = api + "/v1/presentation/" + presentationUuid + "/thumbnail/" + slide_index + '?quality=1920';
+            console.log(imgSrc)
+            document.getElementById("live_slide").src = imgSrc
+        }
+        catch {}
+    }
+    setTimeout(getimgSrc, 300)
+}
+
+getimgSrc();
+</script>
+
+
+</html>

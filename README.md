@@ -17,7 +17,7 @@ see all slides from current presentation, jump slides
 
 ## structure changes
 
-### Home
+### Home DONE
 Display general information and status of ProPresenter
 - if not connected link to settings
     - name

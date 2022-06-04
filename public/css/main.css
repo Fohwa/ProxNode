@@ -260,3 +260,16 @@ scrollbar-width: none;  /* Firefox */
 .formbutton:hover {
   background-color: #459da0;
 }
+
+
+.fullscreen {
+  height: 100%;
+  width: 100%;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  overflow-x: hidden;
+  padding-top: 20px;
+  left: 0;
+  background-color: #111;
+}

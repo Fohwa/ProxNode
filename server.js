@@ -49,6 +49,14 @@ app.get('/live', (req, res) => {
   });
 });
 
+app.get('/fullscreen', (req, res) => {
+  fs.readFile('./database/network.json', 'utf8', function (err, data) {
+    if (err) throw err;
+    api = JSON.parse(data);
+    res.render('fullscreen.ejs', { ip: api.ip, port: api.port })
+  });
+});
+
 app.get('/control', (req, res) => {
   fs.readFile('./database/network.json', 'utf8', function (err, data) {
     if (err) throw err;

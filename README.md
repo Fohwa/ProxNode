@@ -1,6 +1,9 @@
 # ProxNode
 basiclly proxplat with more advanced features using more api request (github pages limited by http requests)
 
+## hosting
+planned on using firebase for free hosting and database, but they block the http requests same as Github pages. So we are stuck with self hosting, making this entire project kinda useless. Might try making an App, will not be available for ios what makes it inpractical for its userbase.
+For that reason i might leave this project for good and can at least say that i gained experience.
 
 ## structure
 
